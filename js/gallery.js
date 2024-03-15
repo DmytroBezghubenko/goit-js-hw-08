@@ -90,12 +90,22 @@ function openBigPhoto(event) {
     event.preventDefault();
     if (event.target === event.currentTarget) {
         return;
-    }
-    const productId = event.target.closest(".gallery-link").getAttribute("href");
-    const instance = basicLightbox.create(`
+  }
+  const productId = event.target.closest(".gallery-link").getAttribute("href");
+  const altFofPhoto = event.target.closest(".gallery-link >img").getAttribute("alt");
+  const instance = basicLightbox.create(`
     <div class="modal">
-        <img src="${productId}">
+        <img src="${productId}" alt="${altFofPhoto}">
     </div>
     `);
-    instance.show();
+  instance.show();
+  
+  const modalWindow = document.querySelector(".basicLightbox");
+  if (modalWindow) {
+    modalWindow.addEventListener("click", closeModal)
+  }  
+  function closeModal(event) {
+  modalWindow.remove();
 }
+}
+
